@@ -20,14 +20,22 @@ public class GildedRose
 				{
 					if (!items[i].name.equals(ItemConstants.SULFURAS_HAND_OF_RAGNAROS))
 					{
-						items[i].quality = items[i].quality - 1;
+						if (items[i].name.startsWith(ItemConstants.CONJURED))
+						{
+							items[i].quality -= 2;
+						}
+						else
+						{
+							items[i].quality = items[i].quality - 1;
+						}
 					}
-
 
 				}
 			}
 			else
 			{
+				// Aged brie and backstage passes
+
 				if (items[i].quality < 50)
 				{
 					items[i].quality = items[i].quality + 1;
@@ -68,7 +76,14 @@ public class GildedRose
 						{
 							if (!items[i].name.equals(ItemConstants.SULFURAS_HAND_OF_RAGNAROS))
 							{
-								items[i].quality = items[i].quality - 1;
+								if (items[i].name.startsWith(ItemConstants.CONJURED))
+								{
+									items[i].quality -= 2;
+								}
+								else
+								{
+									items[i].quality = items[i].quality - 1;
+								}
 							}
 						}
 					}

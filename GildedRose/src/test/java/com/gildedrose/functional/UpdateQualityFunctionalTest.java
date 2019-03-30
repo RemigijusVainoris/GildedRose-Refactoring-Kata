@@ -11,8 +11,9 @@ import com.gildedrose.Item;
 
 public class UpdateQualityFunctionalTest
 {
-    private static GildedRose gildedRose;
-    private static Item[] items;
+    private GildedRose gildedRose;
+    private Item[] items;
+
     @Before
     public void setUp()
     {
@@ -24,7 +25,8 @@ public class UpdateQualityFunctionalTest
                 new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 15, 40), // [4]
                 new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 10, 40), // [5]
                 new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 5, 40), // [6]
-                // new Item("Conjured Mana Cake", 3, 6) // [7]
+                new Item("Conjured Mana Cake", 3, 6), // [7]
+                new Item("Conjured Health Potion", 1, 20) // [8]
        };
 
         gildedRose = new GildedRose(items);
@@ -103,5 +105,19 @@ public class UpdateQualityFunctionalTest
         assertEquals(41, items[4].quality);
         assertEquals(42, items[5].quality);
         assertEquals(43, items[6].quality);
+    }
+
+    @Test
+    public void conjured_item_quality_degrades_twice_as_fast_test()
+    {
+        gildedRose.updateQuality();
+
+        assertEquals(4, items[7].quality);
+        assertEquals(18, items[8].quality);
+
+        gildedRose.updateQuality();
+
+        assertEquals(2, items[7].quality);
+        assertEquals(14, items[8].quality);
     }
 }
