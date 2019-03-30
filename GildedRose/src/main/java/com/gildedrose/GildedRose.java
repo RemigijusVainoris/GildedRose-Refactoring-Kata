@@ -22,7 +22,7 @@ public class GildedRose
 					{
 						if (items[i].name.startsWith(ItemConstants.CONJURED))
 						{
-							items[i].quality -= 2;
+							items[i].quality = items[i].quality > 2 ? items[i].quality - 2 : 0;
 						}
 						else
 						{
@@ -78,7 +78,7 @@ public class GildedRose
 							{
 								if (items[i].name.startsWith(ItemConstants.CONJURED))
 								{
-									items[i].quality -= 2;
+                                    items[i].quality = items[i].quality > 2 ? items[i].quality - 2 : 0;
 								}
 								else
 								{
