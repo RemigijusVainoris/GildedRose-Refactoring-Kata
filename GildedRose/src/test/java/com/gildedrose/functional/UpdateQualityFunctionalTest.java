@@ -2,6 +2,7 @@ package com.gildedrose.functional;
 
 import static org.junit.Assert.assertEquals;
 
+import com.gildedrose.ItemConstants;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,13 +18,13 @@ public class UpdateQualityFunctionalTest
     {
        items = new Item[] {
                 new Item("+5 Dexterity Vest", 10, 20), // [0]
-                new Item("Aged Brie", 2, 0), // [1]
+                new Item(ItemConstants.AGED_BRIE, 2, 0), // [1]
                 new Item("Elixir of the Mongoose", 5, 7), // [2]
-                new Item("Sulfuras, Hand of Ragnaros", 0, 80), // [3]
-                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 40), // [4]
-                new Item("Backstage passes to a TAFKAL80ETC concert", 10, 40), // [5]
-                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 40), // [6]
-                //new Item("Conjured Mana Cake", 3, 6) // [7]
+                new Item(ItemConstants.SULFURAS_HAND_OF_RAGNAROS, 0, 80), // [3]
+                new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 15, 40), // [4]
+                new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 10, 40), // [5]
+                new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 5, 40), // [6]
+                // new Item("Conjured Mana Cake", 3, 6) // [7]
        };
 
         gildedRose = new GildedRose(items);
