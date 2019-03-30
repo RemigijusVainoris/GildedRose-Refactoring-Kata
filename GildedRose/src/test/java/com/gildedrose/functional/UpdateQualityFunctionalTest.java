@@ -26,7 +26,7 @@ public class UpdateQualityFunctionalTest
                 new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 10, 40), // [5]
                 new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 5, 40), // [6]
                 new Item("Conjured Mana Cake", 3, 6), // [7]
-                new Item("Conjured Health Potion", 1, 20) // [8]
+                new Item("Conjured Health Potion", 1, 17) // [8]
        };
 
         gildedRose = new GildedRose(items);
@@ -113,11 +113,20 @@ public class UpdateQualityFunctionalTest
         gildedRose.updateQuality();
 
         assertEquals(4, items[7].quality);
-        assertEquals(18, items[8].quality);
+        assertEquals(15, items[8].quality);
 
         gildedRose.updateQuality();
 
         assertEquals(2, items[7].quality);
-        assertEquals(14, items[8].quality);
+        assertEquals(11, items[8].quality);
+    }
+
+    @Test
+    public void conjured_item_quality_should_not_be_negative_test()
+    {
+        for(int i = 0; i < 10; i++)
+            gildedRose.updateQuality();
+
+        assertEquals(0, items[8].quality);
     }
 }
