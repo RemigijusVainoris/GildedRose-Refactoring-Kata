@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+import java.util.Arrays;
+import java.util.concurrent.Executors;
+
 public class GildedRose
 {
 	Item[] items;
@@ -11,94 +14,81 @@ public class GildedRose
 
 	public void updateQuality()
 	{
-		for (int i = 0; i < items.length; i++)
+		Arrays.stream(items).filter(item -> !ItemConstants.SULFURAS_HAND_OF_RAGNAROS.equalsIgnoreCase(item.name)).forEach(item ->
 		{
-			if (!items[i].name.equals(ItemConstants.AGED_BRIE)
-					&& !items[i].name.equals(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT))
+			if (item.name.equals(ItemConstants.AGED_BRIE) ||
+					item.name.equals(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT))
 			{
-				if (items[i].quality > 0)
-				{
-					if (!items[i].name.equals(ItemConstants.SULFURAS_HAND_OF_RAGNAROS))
-					{
-						if (items[i].name.startsWith(ItemConstants.CONJURED))
-						{
-							items[i].quality = items[i].quality > 2 ? items[i].quality - 2 : 0;
-						}
-						else
-						{
-							items[i].quality = items[i].quality - 1;
-						}
-					}
-
-				}
+				increaseItemQuality(item);
 			}
 			else
 			{
-				// Aged brie and backstage passes
-
-				if (items[i].quality < 50)
-				{
-					items[i].quality = items[i].quality + 1;
-
-					if (items[i].name.equals(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT))
-					{
-						if (items[i].sellIn < 11)
-						{
-							if (items[i].quality < 50)
-							{
-								items[i].quality = items[i].quality + 1;
-							}
-						}
-
-						if (items[i].sellIn < 6)
-						{
-							if (items[i].quality < 50)
-							{
-								items[i].quality = items[i].quality + 1;
-							}
-						}
-					}
-				}
+				reduceItemQuality(item);
 			}
 
-			if (!items[i].name.equals(ItemConstants.SULFURAS_HAND_OF_RAGNAROS))
-			{
-				items[i].sellIn = items[i].sellIn - 1;
-			}
+			item.sellIn--;
 
-			if (items[i].sellIn < 0)
+			if (item.sellIn < 0)
 			{
-				if (!items[i].name.equals(ItemConstants.AGED_BRIE))
+				handleOutOfDateItems(item);
+			}
+		});
+	}
+
+	private void increaseItemQuality(Item item)
+	{
+		if (item.quality < 50)
+		{
+			item.quality++;
+
+			if (item.name.equals(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT))
+			{
+				if (item.sellIn < 11 && item.quality < 50)
 				{
-					if (!items[i].name.equals(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT))
-					{
-						if (items[i].quality > 0)
-						{
-							if (!items[i].name.equals(ItemConstants.SULFURAS_HAND_OF_RAGNAROS))
-							{
-								if (items[i].name.startsWith(ItemConstants.CONJURED))
-								{
-                                    items[i].quality = items[i].quality > 2 ? items[i].quality - 2 : 0;
-								}
-								else
-								{
-									items[i].quality = items[i].quality - 1;
-								}
-							}
-						}
-					}
-					else
-					{
-						items[i].quality = items[i].quality - items[i].quality;
-					}
+					item.quality++;
 				}
-				else
+
+				if (item.sellIn < 6 && item.quality < 50)
 				{
-					if (items[i].quality < 50)
-					{
-						items[i].quality = items[i].quality + 1;
-					}
+					item.quality++;
 				}
+			}
+		}
+	}
+
+	private void reduceItemQuality(Item item)
+	{
+		if (item.quality > 0)
+		{
+			if (item.name.startsWith(ItemConstants.CONJURED))
+			{
+				item.quality = item.quality > 2 ? item.quality - 2 : 0;
+			}
+			else
+			{
+				item.quality--;
+			}
+		}
+	}
+
+	private void handleOutOfDateItems(Item item)
+	{
+		if (!item.name.equals(ItemConstants.AGED_BRIE))
+		{
+			if (!item.name.equals(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT))
+			{
+				reduceItemQuality(item);
+			}
+			else
+			{
+				item.quality = 0;
+			}
+		}
+		else
+		{
+			if (item.quality < 50)
+			{
+				item.quality++;
 			}
 		}
 	}
