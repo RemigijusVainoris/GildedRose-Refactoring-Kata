@@ -1,13 +1,18 @@
 package com.gildedrose.functional;
 
+import static com.gildedrose.constants.ItemConstants.AGED_BRIE;
+import static com.gildedrose.constants.ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT;
+import static com.gildedrose.constants.ItemConstants.SULFURAS_HAND_OF_RAGNAROS;
+import static com.gildedrose.constants.QualityConstants.MAX_QUALITY_LEGENDARY;
 import static org.junit.Assert.assertEquals;
 
+import com.gildedrose.factory.DefaultQualityStrategyFactoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.gildedrose.GildedRose;
 import com.gildedrose.Item;
-import com.gildedrose.ItemConstants;
+import com.gildedrose.constants.ItemConstants;
 
 public class UpdateQualityFunctionalTest
 {
@@ -20,17 +25,17 @@ public class UpdateQualityFunctionalTest
 		items = new Item[]
 			{
 					new Item("+5 Dexterity Vest", 10, 20), // [0]
-					new Item(ItemConstants.AGED_BRIE, 2, 0), // [1]
+					new Item(AGED_BRIE, 2, 0), // [1]
 					new Item("Elixir of the Mongoose", 5, 7), // [2]
-					new Item(ItemConstants.SULFURAS_HAND_OF_RAGNAROS, 0, 80), // [3]
-					new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 15, 40), // [4]
-					new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 10, 40), // [5]
-					new Item(ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 5, 40), // [6]
+					new Item(SULFURAS_HAND_OF_RAGNAROS, 0, MAX_QUALITY_LEGENDARY), // [3]
+					new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 15, 40), // [4]
+					new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 10, 40), // [5]
+					new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 5, 40), // [6]
 					new Item("Conjured Mana Cake", 3, 6), // [7]
 					new Item("Conjured Health Potion", 1, 17) // [8]
 			};
 
-		gildedRose = new GildedRose(items);
+		gildedRose = new GildedRose(items, new DefaultQualityStrategyFactoryImpl());
 	}
 
 	@Test
