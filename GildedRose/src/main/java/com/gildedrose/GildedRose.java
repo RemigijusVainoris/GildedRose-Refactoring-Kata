@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 import java.util.Arrays;
+import java.util.concurrent.Executors;
 
 import com.gildedrose.constants.ItemConstants;
 import com.gildedrose.factory.QualityStrategyFactory;
@@ -19,16 +20,18 @@ public class GildedRose
 
 	public void updateQuality()
 	{
-		Arrays.stream(items)
-                .filter(item -> !ItemConstants.SULFURAS_HAND_OF_RAGNAROS.equalsIgnoreCase(item.name))
-                .forEach(this::processItemQuality);
+        Executors.newSingleThreadExecutor().submit(this::processQuality);
 	}
 
-	private void processItemQuality(Item item)
+	public void processQuality()
     {
-        item.sellIn--;
+        Arrays.stream(items)
+                .filter(item -> !ItemConstants.SULFURAS_HAND_OF_RAGNAROS.equalsIgnoreCase(item.name))
+                .forEach(item -> {
+                    item.sellIn--;
 
-        QualityStrategy strategy = qualityStrategyFactory.getQualityStrategy(item.name);
-        item.quality = strategy.getQualityInRange(strategy.getQuality(item.quality, item.sellIn));
+                    QualityStrategy strategy = qualityStrategyFactory.getQualityStrategy(item.name);
+                    item.quality = strategy.getQualityInRange(strategy.getQuality(item.quality, item.sellIn));
+                });
     }
 }

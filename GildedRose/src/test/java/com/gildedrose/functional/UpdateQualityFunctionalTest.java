@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import com.gildedrose.GildedRose;
 import com.gildedrose.Item;
-import com.gildedrose.constants.ItemConstants;
 
 public class UpdateQualityFunctionalTest
 {
@@ -41,7 +40,7 @@ public class UpdateQualityFunctionalTest
 	@Test
 	public void the_quality_of_items_lowers_at_the_end_of_each_day_test()
 	{
-		gildedRose.updateQuality();
+		gildedRose.processQuality();
 
 		assertEquals(19, items[0].quality);
 		assertEquals(6, items[2].quality);
@@ -51,7 +50,7 @@ public class UpdateQualityFunctionalTest
 	public void the_quality_of_an_item_cannot_be_negative_test()
 	{
 		for (int i = 0; i < 30; i++)
-			gildedRose.updateQuality();
+			gildedRose.processQuality();
 
 		assertEquals(0, items[0].quality);
 	}
@@ -61,7 +60,7 @@ public class UpdateQualityFunctionalTest
 	{
 		// With the exception of Sulfuras, Hand of Ragnaros, which can go up to 80
 		for (int i = 0; i < 60; i++)
-			gildedRose.updateQuality();
+			gildedRose.processQuality();
 
 		assertEquals(50, items[1].quality);
 	}
@@ -70,11 +69,11 @@ public class UpdateQualityFunctionalTest
 	public void the_quality_degrades_twice_as_fast_for_out_of_date_items_test()
 	{
 		for (int i = 0; i < 10; i++)
-			gildedRose.updateQuality();
+			gildedRose.processQuality();
 
 		assertEquals(10, items[0].quality);
 
-		gildedRose.updateQuality();
+		gildedRose.processQuality();
 
 		assertEquals(8, items[0].quality);
 	}
@@ -82,7 +81,7 @@ public class UpdateQualityFunctionalTest
 	@Test
 	public void aged_brie_quality_increases_as_it_gets_older_test()
 	{
-		gildedRose.updateQuality();
+		gildedRose.processQuality();
 
 		assertEquals(1, items[1].quality);
 	}
@@ -90,7 +89,7 @@ public class UpdateQualityFunctionalTest
 	@Test
 	public void sulfuras_should_not_degrade_its_quality_test()
 	{
-		gildedRose.updateQuality();
+		gildedRose.processQuality();
 
 		assertEquals(80, items[3].quality);
 	}
@@ -98,7 +97,7 @@ public class UpdateQualityFunctionalTest
 	@Test
 	public void sulfuras_should_not_degrade_its_sell_in_value_test()
 	{
-		gildedRose.updateQuality();
+		gildedRose.processQuality();
 
 		assertEquals(0, items[3].sellIn);
 	}
@@ -106,7 +105,7 @@ public class UpdateQualityFunctionalTest
 	@Test
 	public void backstage_passes_increase_in_quality_as_sell_in_date_approaches_test()
 	{
-		gildedRose.updateQuality();
+		gildedRose.processQuality();
 
 		assertEquals(41, items[4].quality);
 		assertEquals(42, items[5].quality);
@@ -116,12 +115,12 @@ public class UpdateQualityFunctionalTest
 	@Test
 	public void conjured_item_quality_degrades_twice_as_fast_test()
 	{
-		gildedRose.updateQuality();
+		gildedRose.processQuality();
 
 		assertEquals(4, items[7].quality);
 		assertEquals(15, items[8].quality);
 
-		gildedRose.updateQuality();
+		gildedRose.processQuality();
 
 		assertEquals(2, items[7].quality);
 		assertEquals(11, items[8].quality);
@@ -131,7 +130,7 @@ public class UpdateQualityFunctionalTest
 	public void conjured_item_quality_should_not_be_negative_test()
 	{
 		for (int i = 0; i < 10; i++)
-			gildedRose.updateQuality();
+			gildedRose.processQuality();
 
 		assertEquals(0, items[8].quality);
 	}
