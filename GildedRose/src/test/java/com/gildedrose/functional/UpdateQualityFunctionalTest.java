@@ -6,7 +6,7 @@ import static com.gildedrose.constants.ItemConstants.SULFURAS_HAND_OF_RAGNAROS;
 import static com.gildedrose.constants.QualityConstants.MAX_QUALITY_LEGENDARY;
 import static org.junit.Assert.assertEquals;
 
-import com.gildedrose.factory.DefaultQualityStrategyFactoryImpl;
+import com.gildedrose.factories.DefaultQualityStrategyFactoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 

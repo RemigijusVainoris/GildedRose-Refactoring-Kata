@@ -1,13 +1,13 @@
-package com.gildedrose.factory;
+package com.gildedrose.factories;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.gildedrose.strategy.AgedBrieQualityStrategyImpl;
-import com.gildedrose.strategy.BackstagePassQualityStrategyImpl;
-import com.gildedrose.strategy.ConjuredItemQualityStrategyImpl;
-import com.gildedrose.strategy.DefaultQualityStrategyImpl;
-import com.gildedrose.strategy.QualityStrategy;
+import com.gildedrose.strategies.AgedBrieQualityStrategyImpl;
+import com.gildedrose.strategies.BackstagePassQualityStrategyImpl;
+import com.gildedrose.strategies.ConjuredItemQualityStrategyImpl;
+import com.gildedrose.strategies.DefaultQualityStrategyImpl;
+import com.gildedrose.strategies.QualityStrategy;
 
 import static com.gildedrose.constants.ItemConstants.AGED_BRIE;
 import static com.gildedrose.constants.ItemConstants.BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT;

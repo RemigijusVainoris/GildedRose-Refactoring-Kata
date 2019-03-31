@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.concurrent.Executors;
 
 import com.gildedrose.constants.ItemConstants;
-import com.gildedrose.factory.QualityStrategyFactory;
-import com.gildedrose.strategy.QualityStrategy;
+import com.gildedrose.factories.QualityStrategyFactory;
+import com.gildedrose.strategies.QualityStrategy;
 
 public class GildedRose
 {

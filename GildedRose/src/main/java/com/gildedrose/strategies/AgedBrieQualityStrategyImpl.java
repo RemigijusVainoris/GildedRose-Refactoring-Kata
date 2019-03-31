@@ -1,4 +1,4 @@
-package com.gildedrose.strategy;
+package com.gildedrose.strategies;
 
 public class AgedBrieQualityStrategyImpl implements QualityStrategy
 {

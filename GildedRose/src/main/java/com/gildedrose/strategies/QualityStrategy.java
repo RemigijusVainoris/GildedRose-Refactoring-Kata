@@ -1,4 +1,4 @@
-package com.gildedrose.strategy;
+package com.gildedrose.strategies;
 
 import static com.gildedrose.constants.QualityConstants.MAX_QUALITY;
 import static com.gildedrose.constants.QualityConstants.MIN_QUALITY;
